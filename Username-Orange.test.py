@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoAlertPresentException
+import unittest, time, re
+
+
+class UsernameTestCase(unittest.TestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome()
+        self.driver.implicitly_wait(30)
+        self.base_url = "https://www.google.com/"
+        self.verificationErrors = []
+        self.accept_next_alert = True
+  
+ 
+chrome_path = 'C:/Path/To/chromedriver.exe'
+browser = webdriver.Chrome(chrome_path)
+ 
+browser.get('https://opensource-demo.orangehrmlive.com/web/index.php/pim/viewEmployeeList/path/to/the/form.html')
+browser.find_element_by_id('submit_id').click()
+
+def test_username_test_case(self):
+        driver = self.driver
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+        driver.find_element(By.XPATH, "//button[@type='submit']").click()
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index")
+        driver.find_element(By.XPATH, "//div[@id='app']/div/div/aside/nav/div[2]/ul/li/a/span").click()
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers")
+        driver.find_element(By.XPATH, "//div[@id='app']/div/div[2]/div[2]/div/div/div[2]/form/div/div/div/div/div[2]/input").click()
+        driver.find_element(By.XPATH, "//div[@id='app']/div/div[2]/div[2]/div/div/div[2]/form/div/div/div/div/div[2]/input").clear()
+        driver.find_element(By.XPATH, "//div[@id='app']/div/div[2]/div[2]/div/div/div[2]/form/div/div/div/div/div[2]/input").send_keys("Chee")
+        driver.find_element(By.XPATH, "//button[@type='submit']").click()
+        driver.find_element(By.XPATH, "//div[@id='app']/div/div[2]/div[2]/div/div/div[2]/form/div/div/div/div/div[2]/input").click()
+        driver.find_element(By.XPATH, "//div[@id='app']/div/div[2]/div[2]/div/div/div[2]/form/div/div/div/div/div[2]/input").click()
+        driver.find_element(By.XPATH, "//div[@id='app']/div/div[2]/div[2]/div/div/div[2]/form/div/div/div/div/div[2]/input").clear()
+        driver.find_element(By.XPATH, "//div[@id='app']/div/div[2]/div[2]/div/div/div[2]/form/div/div/div/div/div[2]/input").send_keys("Nina.Patel")
+        driver.find_element(By.XPATH, "//button[@type='submit']").click()
+        driver.find_element(By.XPATH, "//div[@id='app']/div/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div/div/div/div/div/label/span/i").click()
+        driver.find_element(By.XPATH, "//div[@id='app']/div/div/header/div/div[2]/ul/li/span/p").click()
+        driver.find_element(By.LINK_TEXT, "Logout").click()
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
+    
+def is_element_present(self, how, what):
+        try: self.driver.find_element(by=how, value=what)
+        except NoSuchElementException as e: return False
+        return True
+    
+def is_alert_present(self):
+        try: self.driver.switch_to_alert()
+        except NoAlertPresentException as e: return False
+        return True
+    
+def close_alert_and_get_its_text(self):
+        try:
+            alert = self.driver.switch_to_alert()
+            alert_text = alert.text
+            if self.accept_next_alert:
+                alert.accept()
+            else:
+                alert.dismiss()
+            return alert_text
+        finally: self.accept_next_alert = True
+    
+def tearDown(self):
+        self.driver.quit()
+        self.assertEqual([], self.verificationErrors)
+
+if __name__ == "__main__":
+    unittest.main()
